@@ -50,7 +50,7 @@
         <div class="bottom-bar">
           <div class="header-container">
             <nav class="menu">
-              <button id="themeToggle" class="theme-toggle">🌙 Тема</button>
+              <button id="themeToggle" class="theme-toggle">🌙</button>
               <a href="index.html">Головна</a>
               <a href="LB1.html">Лабораторна 1</a>
               <a href="LB2.html" class="active">Лабораторна 2</a>
@@ -182,7 +182,7 @@
 
     if (savedTheme === "light") {
       document.body.classList.add("light-theme");
-      themeToggle.textContent = "☀️ Тема";
+      themeToggle.textContent = "☀️";
     }
 
     themeToggle.addEventListener("click", () => {
@@ -192,7 +192,7 @@
 
       localStorage.setItem("theme", isLight ? "light" : "dark");
 
-      themeToggle.textContent = isLight ? "☀️ Тема" : "🌙 Тема";
+      themeToggle.textContent = isLight ? "☀️" : "🌙";
     });
   });
 </script>
