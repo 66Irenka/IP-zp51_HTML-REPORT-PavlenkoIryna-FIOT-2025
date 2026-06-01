@@ -306,11 +306,11 @@ body {
   }
 
   .left-side {
-    order: 2;
+    order: 1;
   }
 
   .right-side {
-    order: 1;
+    order: 2;
   }
 }
 
