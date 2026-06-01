@@ -1,0 +1,83 @@
+<h2>Завдання 1.1</h2>
+
+<p>
+Написати функцію <code>createProduct(obj, callback)</code>,
+яка приймає об'єкт товару без ідентифікатора та callback-функцію.
+Функція повинна створити новий об'єкт товару, додати йому
+унікальний ідентифікатор <code>id</code> та передати створений
+об'єкт у callback-функцію.
+</p>
+
+<p>
+Створити callback-функції:
+</p>
+
+<ul>
+  <li><code>logProduct(product)</code> — виводить об'єкт товару в консоль.</li>
+  <li><code>logTotalPrice(product)</code> — виводить загальну вартість товару.</li>
+</ul>
+
+<h3>Програмний код</h3>
+
+<pre><code>
+    function task1_1() {
+
+  function createProduct(obj, callback) {
+    const product = {
+      id: Date.now(),
+      ...obj,
+    };
+
+    callback(product);
+  }
+
+  function logProduct(product) {
+    console.log("Інформація про товар:");
+    console.log(product);
+  }
+
+  function logTotalPrice(product) {
+    console.log(
+      `Загальна вартість: ${product.price * product.quantity}`
+    );
+  }
+
+  const product = {
+    name: "Laptop",
+    price: 25000,
+    quantity: 2,
+  };
+
+  createProduct(product, logProduct);
+  createProduct(product, logTotalPrice);
+}
+</code></pre>
+
+<h3>Результат виконання</h3>
+
+<p>
+Створено об'єкт товару з унікальним ідентифікатором.
+У консоль виводиться інформація про товар та загальна
+вартість замовлення.
+</p>
+
+<pre><code>
+Інформація про товар:
+{
+  id: 1740000000000,
+  name: "Laptop",
+  price: 25000,
+  quantity: 2
+}
+
+Загальна вартість: 50000
+</code></pre>
+
+<h3>Висновок</h3>
+
+<p>
+Під час виконання завдання було опрацьовано передачу
+функцій як параметрів (callback-функції), роботу з
+об'єктами JavaScript та використання оператора
+розгортання <code>...</code> для створення нового об'єкта.
+</p>
