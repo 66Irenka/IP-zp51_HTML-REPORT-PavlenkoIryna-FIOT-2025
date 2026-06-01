@@ -1,4 +1,5 @@
 // ЛР №4. Варіант 13
+
 // Завдання №1
 // Збережіть введене значення (використати метод prompt()) у змінну value
 // Вивести це значення у Console, використовуючи шаблонний рядок.
@@ -42,21 +43,28 @@ if (valueInput === null || valueInput.trim() === "" || Number.isNaN(value)) {
 
 
 function task2() {
-const day = prompt("Введіть день тижня (1-7):");
-let finish;
+  const number = prompt("Введіть число від 1 до 4:");
 
-switch (day) {
-  case '1': finish = "понеділок"; break;
-  case '2': finish = "вівторок"; break;
-  case '3': finish = "середа"; break;
-  case '4': finish = "четвер"; break;
-  case '5': finish = "п'ятниця"; break;
-  case '6': finish = "субота"; break;
-  case '7': finish = "неділя"; break;
-  default: finish = "некоректне значення";
-}
+  let result;
 
-console.log(finish);
+  switch (number) {
+    case "1":
+      result = "зима";
+      break;
+    case "2":
+      result = "весна";
+      break;
+    case "3":
+      result = "літо";
+      break;
+    case "4":
+      result = "осінь";
+      break;
+    default:
+      result = "некоректне значення";
+  }
+
+  console.log(`Результат: ${result}`);
 }
 
 

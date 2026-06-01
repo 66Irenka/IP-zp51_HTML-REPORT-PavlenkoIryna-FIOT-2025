@@ -418,3 +418,64 @@ body.light-theme .theme-toggle {
 body.light-theme .theme-toggle:hover {
   background-color: #a5c5c7;
 }
+
+pre {
+  background: #f8f9fa;
+  border: 1px solid #d6dce1;
+  border-radius: 10px;
+  padding: 16px;
+
+  overflow-x: auto;
+
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.5;
+
+  color: #212529;
+}
+
+code {
+  background: transparent;
+  color: inherit;
+}
+
+body:not(.light-theme) pre {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  color: #f1f1f1;
+}
+
+.info-card pre,
+.info-card pre code {
+  background: #f8f9fa !important;
+  color: #212529 !important;
+  border: none;
+  box-shadow: none;
+}
+
+.info-card pre {
+  border: 1px solid #d6dce1 !important;
+  border-radius: 10px;
+  padding: 16px;
+  overflow-x: auto;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.info-card code {
+  background: transparent !important;
+  color: inherit !important;
+  border: none !important;
+  padding: 0;
+}
+
+body:not(.light-theme) .info-card pre,
+body:not(.light-theme) .info-card pre code {
+  background: #1e1e1e !important;
+  color: #f1f1f1 !important;
+}
+
+body:not(.light-theme) .info-card pre {
+  border: 1px solid #333 !important;
+}
