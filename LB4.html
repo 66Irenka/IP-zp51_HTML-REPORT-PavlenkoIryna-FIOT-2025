@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Звіт Лабораторна 2 | Павленко І. А.</title>
+    <title>Звіт Лабораторна 4 | Павленко І. А.</title>
     <link rel="stylesheet" href="style.css" />
    
    <script>
       async function loadPage(page) {
         try {
-          let response = await fetch('lab2content/' + page);
+          let response = await fetch('lab4content/' + page);
           let text = await response.text();
           document.getElementById('output').innerHTML = text;
 
@@ -29,8 +29,7 @@
         <div class="top-bar">
           <div class="header-container">
             <h1 class="text">
-             ЗВІТИ З ЛАБОРАТОРНИХ РОБІТ З ДИСЦИПЛІНИ "Проєктування
-              WEB-застосувань"
+             ЗВІТИ З ЛАБОРАТОРНИХ РОБІТ"
             </h1>
           </div>
         </div>
@@ -53,9 +52,9 @@
               <button id="themeToggle" class="theme-toggle">🌙 Тема</button>
               <a href="index.html">Головна</a>
               <a href="LB1.html">Лабораторна 1</a>
-              <a href="LB2.html" class="active">Лабораторна 2</a>
+              <a href="LB2.html">Лабораторна 2</a>
               <a href="#">Лабораторна 3</a>
-              <a href="LB4.html">Лабораторна 4</a>
+              <a href="LB4.html" class="active">Лабораторна 4</a>
               <a href="#">Лабораторна 5</a>
               <a href="#">Лабораторна 6</a>
               <a href="#">Лабораторна 7</a>
@@ -75,84 +74,26 @@
                   <li>
                     <a
                       href="javascript:void(0)"
-                      onclick="loadPage('tema2.html')">
-                      Тема. Мета ЛР №2. Місце розташування сайту
+                      onclick="loadPage('tema4.html')">
+                      Тема.ЛР №4. ОСНОВИ JAVASCRIPT 
                     </a>
-                  </li>
-
-                  <li>
-                    <a
-                      href="javascript:void(0)"
-                      onclick="loadPage('connection.html')">
-                      Способи підключення стилів
-                    </a>
-                  </li>
-
-                  <li>
-                    <h3>Селектори</h3>
-                    <ul class="sub-menu">
-                      <li>
-                        <a
-                          href="javascript:void(0)"
-                          onclick="loadPage('tag.html')">
-                          Селектор тегу
-                        </a>
-                      </li>
-
-                      <li>
-                        <a
-                          href="javascript:void(0)"
-                          onclick="loadPage('class.html')">
-                          Селектор класу
-                        </a>
-                      </li>
-
-                      <li>
-                        <a
-                          href="javascript:void(0)"
-                          onclick="loadPage('ids.html')">
-                          Селектори ідентифікаторів
-                        </a>
-                      </li>
-
-                      <li>
-                        <a
-                          href="javascript:void(0)"
-                          onclick="loadPage('other-selectors.html')">
-                          Інші селектори
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-
-                  <li>
-                    <a href="javascript:void(0)" onclick="loadPage('css.html')">
-                      CSS: Шрифти. Текст. Таблиці. Фон. Контур. Списки. Кнопки
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      href="javascript:void(0)"
-                      onclick="loadPage('conclusions.html')">
-                      Висновки до ЛР №2
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      href="javascript:void(0)"
-                      onclick="loadPage('questions.html')">
-                      Контрольні питання
-                    </a>
-                  </li>
+                 
+<li><a href="javascript:void(0)" onclick="loadPage('task1.html')">Завдання №1</a></li>
+<li><a href="javascript:void(0)" onclick="loadPage('task2.html')">Завдання №2</a></li>
+<li><a href="javascript:void(0)" onclick="loadPage('task3.html')">Завдання №3</a></li>
+<li><a href="javascript:void(0)" onclick="loadPage('task4.html')">Завдання №4</a></li>
+<li><a href="javascript:void(0)" onclick="loadPage('task5.html')">Завдання №5</a></li>
+<li><a href="javascript:void(0)" onclick="loadPage('task6.html')">Завдання №6</a></li>
+<li><a href="javascript:void(0)" onclick="loadPage('task7.html')">Завдання №7</a></li>
+<li><a href="javascript:void(0)" onclick="loadPage('task8.html')">Завдання №8</a></li>
+<li><a href="javascript:void(0)" onclick="loadPage('conclusions4.html')">Висновки</a></li>
                 </ul>
               </nav>
             </aside>
           </div>
           <div class="right-side">
             <div class="info-card" id="output">
-              <h2>Звіт до Лабораторної роботи №2</h2>
+              <h2>Звіт до Лабораторної роботи №4</h2>
               <p>Оберіть пункт меню зліва, щоб переглянути матеріали.</p>
             </div>
           </div>
@@ -161,7 +102,7 @@
       <footer class="footer">
         <div class="footer-container">
           <p>
-            © 2025 Павленко І. А. –  ЗВІТИ З ЛАБОРАТОРНИХ РОБІТ"
+            © 2026 Павленко І. А. –  ЗВІТИ З ЛАБОРАТОРНИХ РОБІТ З ДИСЦИПЛІНИ "Основи клієнтських розробок"
           </p>
           <p>
             Контакти:
@@ -171,6 +112,7 @@
         </div>
       </footer>
     </div>
+   <script src="lab4content/lab4-tasks.js"></script>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -196,7 +138,6 @@
     });
   });
 </script>
-Важливо
 
   </body>
 </html>

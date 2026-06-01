@@ -1,0 +1,65 @@
+<h2>Завдання №7</h2>
+
+<h3>Програмний код</h3>
+
+<pre><code>
+function task7() {
+    
+  function findMax(arr) {
+    let max = arr[0];
+
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i] > max) {
+        max = arr[i];
+      }
+    }
+
+    return max;
+  }
+
+  function createArrayB(arrA, maxVal) {
+    const arrB = [];
+
+    for (let i = 0; i < arrA.length; i++) {
+      arrB.push(maxVal * arrA[i]);
+    }
+
+    return arrB;
+  }
+
+  function insertionSortDescending(arr) {
+    for (let i = 1; i < arr.length; i++) {
+      const key = arr[i];
+      let j = i - 1;
+
+      while (j >= 0 && arr[j] < key) {
+        arr[j + 1] = arr[j];
+        j--;
+      }
+
+      arr[j + 1] = key;
+    }
+
+    return arr;
+  }
+
+  const arrA = [3, 7, 2, 9, 5];
+  const maxVal = findMax(arrA);
+  const arrB = createArrayB(arrA, maxVal);
+  const sortedArrB = insertionSortDescending([...arrB]);
+
+  console.log("Масив A:", arrA);
+  console.log("Максимальний елемент:", maxVal);
+  console.log("Масив B:", arrB);
+  console.log("Масив B після сортування:", sortedArrB);
+}
+</code></pre>
+
+<h3>Результат виконання</h3>
+
+<pre><code>
+Масив A: [3, 7, 2, 9, 5]
+Максимальний елемент: 9
+Масив B: [27, 63, 18, 81, 45]
+Масив B після сортування: [81, 63, 45, 27, 18]
+</code></pre>

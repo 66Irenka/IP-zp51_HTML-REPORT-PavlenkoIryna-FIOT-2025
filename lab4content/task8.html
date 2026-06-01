@@ -1,0 +1,71 @@
+<h2>Завдання №8</h2>
+
+<h3>Умова завдання</h3>
+
+<p>
+Є двовимірний масив додатних і від’ємних чисел. Потрібно вивести його у
+Console, створити окремі масиви додатних і від’ємних чисел, а третій
+елемент у додатному масиві замінити на від’ємне значення, введене
+за допомогою <code>prompt()</code>.
+</p>
+
+<h3>Програмний код</h3>
+
+<pre><code>
+function task8() {
+    
+  const matrix = [
+    [5, -2, 8],
+    [-1, 3, -7],
+    [4, 0, -6],
+  ];
+
+  console.log("Початковий масив:", matrix);
+
+  const positiveNumbers = [];
+  const negativeNumbers = [];
+
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      const value = matrix[i][j];
+
+      if (value > 0) {
+        positiveNumbers.push(value);
+      } else if (value < 0) {
+        negativeNumbers.push(value);
+      }
+    }
+  }
+
+  console.log("Додатні:", positiveNumbers);
+  console.log("Від’ємні:", negativeNumbers);
+
+  if (positiveNumbers.length >= 3) {
+    const newNegative = prompt(
+      "Введіть від’ємне число для заміни третього елемента:"
+    );
+
+    positiveNumbers[2] = Number(newNegative);
+  } else {
+    alert("У масиві додатних менше ніж 3 елементи.");
+  }
+
+  console.log("Додатні після заміни:", positiveNumbers);
+}
+</code></pre>
+
+<h3>Результат виконання</h3>
+
+<p>
+Після виконання програми у Console буде виведено початковий двовимірний
+масив, масив додатних чисел, масив від’ємних чисел та оновлений масив
+додатних чисел після заміни третього елемента.
+</p>
+
+<h3>Висновок</h3>
+
+<p>
+У завданні було використано двовимірний масив, вкладені цикли,
+умовні оператори, метод <code>push()</code> та введення значення через
+<code>prompt()</code>.
+</p>

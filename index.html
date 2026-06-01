@@ -12,8 +12,7 @@
         <div class="top-bar">
           <div class="header-container">
             <h1 class="text">
-              ЗВІТИ З ЛАБОРАТОРНИХ РОБІТ З ДИСЦИПЛІНИ "Проєктування
-              WEB-застосувань"
+              ЗВІТИ З ЛАБОРАТОРНИХ РОБІТ"
             </h1>
           </div>
         </div>
@@ -32,11 +31,12 @@
         <div class="bottom-bar">
           <div class="header-container">
             <nav class="menu">
+              <button id="themeToggle" class="theme-toggle">🌙 Тема</button>
               <a href="index.html">Головна</a>
               <a href="LB1.html">Лабораторна 1</a>
               <a href="LB2.html">Лабораторна 2</a>
               <a href="#">Лабораторна 3</a>
-              <a href="#">Лабораторна 4</a>
+              <a href="LB4.html">Лабораторна 4</a>
               <a href="#">Лабораторна 5</a>
               <a href="#">Лабораторна 6</a>
               <a href="#">Лабораторна 7</a>
@@ -165,5 +165,32 @@
         tabs.forEach((tab) => (tab.style.display = 'none'));
         document.getElementById(tabId).style.display = 'block';}
     </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const themeToggle = document.getElementById("themeToggle");
+
+    if (!themeToggle) return;
+
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "light") {
+      document.body.classList.add("light-theme");
+      themeToggle.textContent = "☀️ Тема";
+    }
+
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-theme");
+
+      const isLight = document.body.classList.contains("light-theme");
+
+      localStorage.setItem("theme", isLight ? "light" : "dark");
+
+      themeToggle.textContent = isLight ? "☀️ Тема" : "🌙 Тема";
+    });
+  });
+</script>
+Важливо
+
   </body>
 </html>

@@ -1,0 +1,63 @@
+<h2>Завдання №3</h2>
+
+<h3>Умова завдання</h3>
+
+<p>
+Є користувачі <strong>Admin</strong> та <strong>User</strong> з відповідними паролями.
+Потрібно запросити логін користувача за допомогою <code>prompt()</code>,
+перевірити введене значення та у разі правильного логіна запросити пароль.
+Результат авторизації вивести за допомогою <code>alert()</code>.
+</p>
+
+<h3>Програмний код</h3>
+
+<pre><code>
+function task3() {
+    
+  const adminLogin = "Admin";
+  const adminPass = "1234";
+
+  const userLogin = "User";
+  const userPass = "qwerty";
+
+  const login = prompt("Введіть логін:");
+
+  console.log(`Введений логін: ${login}`);
+
+  if (login === null || login.trim() === "") {
+    alert("Cancelled");
+  } else if (login === adminLogin) {
+    const pass = prompt("Введіть пароль для Admin:");
+
+    if (pass === adminPass) {
+      alert("Hello, Admin");
+    } else {
+      alert("I don't know you");
+    }
+  } else if (login === userLogin) {
+    const pass = prompt("Введіть пароль для User:");
+
+    if (pass === userPass) {
+      alert("Hello, User");
+    } else {
+      alert("I don't know you");
+    }
+  } else {
+    alert("I don't know you");
+  }
+}
+</code></pre>
+
+<h3>Результат виконання</h3>
+
+<p>
+При введенні логіна <strong>Admin</strong> та пароля <strong>1234</strong>
+програма виводить повідомлення <code>Hello, Admin</code>.
+</p>
+
+<h3>Висновок</h3>
+
+<p>
+У завданні було використано умовні оператори для перевірки логіна та пароля,
+а також методи <code>prompt()</code>, <code>alert()</code> і <code>console.log()</code>.
+</p>

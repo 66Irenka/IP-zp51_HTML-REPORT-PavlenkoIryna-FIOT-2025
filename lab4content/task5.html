@@ -1,0 +1,54 @@
+<h2>Завдання №5</h2>
+
+<h3>Умова завдання</h3>
+
+<p>
+Функція <code>checkForSpam(message)</code> приймає рядок
+і перевіряє його на вміст заборонених слів
+<code>spam</code> і <code>sale</code>.
+Слова можуть бути написані у довільному регістрі,
+наприклад <code>SPAM</code> або <code>sAlE</code>.
+</p>
+
+<p>
+Якщо знайдено заборонене слово, функція повертає
+<code>true</code>. Якщо заборонених слів немає —
+повертає <code>false</code>.
+</p>
+
+<h3>Програмний код</h3>
+
+<pre><code>
+function task5() {
+    
+  function checkForSpam(message) {
+    const normalizedMessage = message.toLowerCase();
+
+    return (
+      normalizedMessage.includes("spam") ||
+      normalizedMessage.includes("sale")
+    );
+  }
+
+  console.log(checkForSpam("Buy huge SALE now!"));
+  console.log(checkForSpam("This is just a normal message"));
+  console.log(checkForSpam("Get rid of SPAM"));
+}
+</code></pre>
+
+<h3>Результат виконання</h3>
+
+<pre><code>
+true
+false
+true
+</code></pre>
+
+<h3>Висновок</h3>
+
+<p>
+У завданні було використано метод <code>toLowerCase()</code>
+для приведення рядка до нижнього регістру та метод
+<code>includes()</code> для перевірки наявності заборонених слів
+у тексті.
+</p>

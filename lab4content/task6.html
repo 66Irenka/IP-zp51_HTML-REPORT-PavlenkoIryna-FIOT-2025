@@ -1,0 +1,45 @@
+<h2>Завдання №6</h2>
+
+<h3>Умова завдання</h3>
+
+<p>
+Написати функцію <code>filterArray(numbers, value)</code>, яка приймає
+масив чисел та значення. Функція має повернути новий масив, що містить
+лише ті числа, які більші за задане значення <code>value</code>.
+</p>
+
+<h3>Програмний код</h3>
+
+<pre><code>
+function task6() {
+    
+  function filterArray(numbers, value) {
+    const filteredNumbers = [];
+
+    for (let i = 0; i < numbers.length; i += 1) {
+      const number = numbers[i];
+
+      if (number > value) {
+        filteredNumbers.push(number);
+      }
+    }
+
+    return filteredNumbers;
+  }
+
+  console.log(filterArray([1, 2, 3, 4, 5], 3));
+}
+</code></pre>
+
+<h3>Результат виконання</h3>
+
+<pre><code>
+[4, 5]
+</code></pre>
+
+<h3>Висновок</h3>
+
+<p>
+У завданні було використано цикл <code>for</code>, умовний оператор
+<code>if</code> та метод <code>push()</code> для формування нового масиву.
+</p>

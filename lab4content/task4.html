@@ -1,0 +1,46 @@
+<h2>Завдання №4</h2>
+
+<h3>Умова завдання</h3>
+
+<p>
+Оголосити функцію <code>makeTransaction</code>, яка очікує два параметри:
+<code>quantity</code> — кількість замовлених дроїдів та
+<code>pricePerDroid</code> — вартість одного дроїда.
+Функція має повертати рядок з повідомленням про покупку.
+</p>
+
+<h3>Програмний код</h3>
+
+<pre><code>
+function task4() {
+    
+  function makeTransaction(quantity, pricePerDroid) {
+    const totalPrice = quantity * pricePerDroid;
+
+    return `You ordered ${quantity} droids worth ${totalPrice} credits!`;
+  }
+
+  console.log(makeTransaction(5, 3000));
+  console.log(makeTransaction(3, 1500));
+  console.log(makeTransaction(10, 500));
+}
+</code></pre>
+
+<h3>Результат виконання</h3>
+
+<p>
+У консолі буде виведено:
+</p>
+
+<pre><code>
+You ordered 5 droids worth 15000 credits!
+You ordered 3 droids worth 4500 credits!
+You ordered 10 droids worth 5000 credits!
+</code></pre>
+
+<h3>Висновок</h3>
+
+<p>
+У завданні було створено функцію з параметрами, виконано обчислення загальної
+вартості замовлення та використано шаблонний рядок для формування результату.
+</p>
