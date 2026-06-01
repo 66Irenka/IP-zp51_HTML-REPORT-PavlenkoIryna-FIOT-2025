@@ -1,0 +1,60 @@
+<h2>Завдання №1.9</h2>
+
+<h3>Умова завдання</h3>
+
+<p>
+Для масиву об'єктів <code>tweets</code> підрахувати кількість
+використань кожного тегу та повернути об'єкт зі статистикою.
+Очікуваний результат:
+<code>{ js: 3, nodejs: 3, html: 2, css: 2, react: 2 }</code>.
+</p>
+
+<h3>Програмний код</h3>
+
+<pre><code>
+function task1_9() {
+  const tweets = [
+    { id: "000", likes: 5, tags: ["js", "nodejs"] },
+    { id: "001", likes: 2, tags: ["html", "css"] },
+    { id: "002", likes: 17, tags: ["html", "js", "nodejs"] },
+    { id: "003", likes: 8, tags: ["css", "react"] },
+    { id: "004", likes: 0, tags: ["js", "nodejs", "react"] },
+  ];
+
+  const tagStats = tweets
+    .flatMap(tweet => tweet.tags)
+    .reduce((acc, tag) => {
+      acc[tag] = (acc[tag] || 0) + 1;
+      return acc;
+    }, {});
+
+  console.log(tagStats);
+}
+</code></pre>
+
+<h3>Результат виконання</h3>
+
+<p>
+Після запуску функції у консоль виводиться об'єкт зі статистикою
+використання тегів:
+</p>
+
+<pre><code>
+{
+  js: 3,
+  nodejs: 3,
+  html: 2,
+  css: 2,
+  react: 2
+}
+</code></pre>
+
+<h3>Висновок</h3>
+
+<p>
+Під час виконання завдання було використано методи
+<code>flatMap()</code> та <code>reduce()</code>.
+За їх допомогою всі теги були об'єднані в один масив і підраховано
+кількість входжень кожного тегу.
+</p>
+

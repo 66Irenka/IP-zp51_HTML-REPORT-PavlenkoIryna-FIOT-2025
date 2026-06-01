@@ -1,0 +1,92 @@
+<h2>Завдання №2.7</h2>
+
+<h3>Умова завдання</h3>
+
+<p>
+Розробити клас <code>Calculator</code>, який підтримує
+ланцюжковий виклик методів (method chaining) для виконання
+арифметичних операцій. Реалізувати методи:
+<code>number()</code>, <code>add()</code>,
+<code>subtract()</code>, <code>multiply()</code>,
+<code>divide()</code> та <code>getResult()</code>.
+</p>
+
+<h3>Програмний код</h3>
+
+<pre><code>
+function task2_7() {
+  class Calculator {
+    constructor() {
+      this.result = 0;
+    }
+
+    number(value) {
+      this.result = value;
+      return this;
+    }
+
+    add(value) {
+      this.result += value;
+      return this;
+    }
+
+    subtract(value) {
+      this.result -= value;
+      return this;
+    }
+
+    multiply(value) {
+      this.result *= value;
+      return this;
+    }
+
+    divide(value) {
+      if (value === 0) {
+        throw new Error("Ділення на нуль неможливе");
+      }
+
+      this.result /= value;
+      return this;
+    }
+
+    getResult() {
+      return this.result;
+    }
+  }
+
+  const calc = new Calculator();
+
+  const result = calc
+    .number(10)
+    .add(5)
+    .subtract(3)
+    .multiply(4)
+    .divide(2)
+    .getResult();
+
+  console.log("Результат обчислення:", result);
+}
+</code></pre>
+
+<h3>Результат виконання</h3>
+
+<p>
+Після послідовного виконання операцій:
+10 + 5 - 3 = 12,
+12 * 4 = 48,
+48 / 2 = 24.
+</p>
+
+<pre>
+Результат обчислення: 24
+</pre>
+
+<h3>Висновок</h3>
+
+<p>
+У ході виконання завдання було створено клас
+<code>Calculator</code>, який підтримує ланцюжковий виклик
+методів. Реалізовано основні арифметичні операції та
+обробку помилки при діленні на нуль.
+</p>
+
