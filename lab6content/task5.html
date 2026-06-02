@@ -1,0 +1,51 @@
+<h2>Завдання №5</h2>
+
+<p>
+Створити HTML-розмітку, яка складається з тексту з використанням
+селектора класу <code>class="taskTitle"</code> та блоку
+<code>div</code> з використанням селектора ідентифікатора
+<code>id="place"</code>.
+</p>
+
+<p>
+Додати слухач кліку на <code>window</code> і визначити, чи клікнув
+користувач у <code>div</code> з <code>id="place"</code>.
+Якщо користувач клікнув на зеленому прямокутнику, у консолі
+виводиться <code>true</code>. В іншому випадку — <code>false</code>.
+</p>
+
+<div class="task5-container">
+  <p class="taskTitle">ЗАВДАННЯ 5</p>
+  <div id="place"></div>
+</div>
+
+<h3>Програмний код</h3>
+
+<pre><code>
+function task5() {
+  const place = document.getElementById("place");
+
+  if (!place) return;
+
+  window.onclick = (event) => {
+    console.log(place.contains(event.target));
+  };
+}
+</code></pre>
+
+<h3>Результат виконання</h3>
+
+<p>
+Після натискання на зелений прямокутник у консолі відображається
+значення <code>true</code>. Якщо натиснути в будь-якому іншому місці
+сторінки, у консолі відображається <code>false</code>.
+</p>
+
+<h3>Висновок</h3>
+
+<p>
+У ході виконання завдання було використано обробник події
+<code>click</code>, об'єкт події <code>event</code> та метод
+<code>contains()</code>, який дозволяє перевірити, чи належить елемент,
+по якому виконано клік, до заданого блоку.
+</p>

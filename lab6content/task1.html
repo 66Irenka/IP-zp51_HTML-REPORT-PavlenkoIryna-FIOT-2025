@@ -1,0 +1,34 @@
+<h2>Завдання №1</h2>
+
+<p>
+Створити поле введення та кнопку SHOW ME.
+При натисканні кнопки значення з поля введення
+повинно виводитися у консоль.
+</p>
+
+<div class="task-box">
+  <button id="showBtn">SHOW ME</button>
+  <input type="text" id="messageInput" placeholder="Введіть текст">
+</div>
+
+<h3>Програмний код</h3>
+
+<pre><code>
+function task1() {
+  const input = document.getElementById("messageInput");
+  const button = document.getElementById("showBtn");
+
+  if (!input || !button) return;
+
+  button.onclick = () => {
+  console.log(input.value);
+  };
+}
+</code></pre>
+
+<h3>Результат виконання</h3>
+
+<p>
+Після введення тексту та натискання кнопки
+значення поля відображається у консолі браузера.
+</p>

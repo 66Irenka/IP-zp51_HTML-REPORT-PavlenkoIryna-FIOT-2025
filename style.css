@@ -532,3 +532,38 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+.info-card .task5-container {
+  width: 140px;
+  padding: 10px;
+  background-color: #9acd8f;
+  color: #000;
+}
+
+.info-card .task5-container .taskTitle {
+  color: #000 !important;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.info-card .task5-container #place {
+  width: 70px;
+  height: 140px;
+  background-color: green;
+}
+
+.widget {
+  margin-top: 20px;
+}
+
+.change-color {
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.color {
+  font-weight: bold;
+}

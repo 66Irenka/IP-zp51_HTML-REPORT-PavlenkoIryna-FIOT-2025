@@ -1,0 +1,74 @@
+<h2>Завдання №8</h2>
+
+<p>
+Написати скрипт управління формою логіна. Обробка відправлення форми
+повинна відбуватися за подією <code>submit</code>. Сторінка не повинна
+перезавантажуватися. Якщо є незаповнені поля, потрібно вивести
+попередження <code>All form fields must be filled in</code>. Якщо всі поля
+заповнені, потрібно зібрати дані в об'єкт, вивести його в консоль і
+очистити форму методом <code>reset()</code>.
+</p>
+
+<form class="login-form">
+  <label>
+    Email
+    <input type="email" name="email" />
+  </label>
+
+  <label>
+    Password
+    <input type="password" name="password" />
+  </label>
+
+  <button type="submit">Log in</button>
+</form>
+
+<h3>Програмний код</h3>
+
+<pre><code>
+function task8() {
+  const form = document.querySelector(".login-form");
+
+  if (!form) return;
+
+  form.onsubmit = (event) => {
+    event.preventDefault();
+
+    const email = form.elements.email.value.trim();
+    const password = form.elements.password.value.trim();
+
+    if (email === "" || password === "") {
+      alert("All form fields must be filled in");
+      return;
+    }
+
+    const formData = {
+      email,
+      password,
+    };
+
+    console.log(formData);
+
+    form.reset();
+  };
+}
+</code></pre>
+
+<h3>Результат виконання</h3>
+
+<p>
+Якщо поля форми порожні, з'являється повідомлення
+<code>All form fields must be filled in</code>. Якщо користувач заповнив
+email і password, у консоль виводиться об'єкт із даними форми, після чого
+форма очищується.
+</p>
+
+<h3>Висновок</h3>
+
+<p>
+У ході виконання завдання було використано обробник події
+<code>submit</code>, метод <code>preventDefault() запобігає перезавантаженню сторінки після надсилання форми.</code>, властивість
+<code>elements</code> для доступу до полів форми, метод <code>trim()</code>
+для очищення значень від зайвих пробілів та метод <code>reset()</code> для
+очищення форми після успішного відправлення.
+</p>

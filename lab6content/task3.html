@@ -1,0 +1,60 @@
+<h2>Завдання №3</h2>
+
+<p>
+Створити HTML-розмітку, яка складається з тексту, кнопки та поля введення.
+Кнопка <strong>«Приховати»</strong> ховає введений текст, виводячи зірочки
+замість введеної інформації, та змінює назву кнопки на
+<strong>«Розкрити»</strong>. При повторному натисканні текст знову стає
+доступним, а кнопка набуває початкового вигляду.
+</p>
+
+<div class="task-box">
+  <h3>ЗАВДАННЯ 3</h3>
+
+  <input
+    type="text"
+    id="passwordInput"
+    value="пароль"
+  />
+
+  <button id="togglePasswordBtn" type="button">
+    Приховати
+  </button>
+</div>
+
+<h3>Програмний код</h3>
+
+<pre><code>
+function task3() {
+  const input = document.getElementById("passwordInput");
+  const button = document.getElementById("togglePasswordBtn");
+
+  if (!input || !button) return;
+
+  button.addEventListener("click", () => {
+    if (input.type === "text") {
+      input.type = "password";
+      button.textContent = "Розкрити";
+    } else {
+      input.type = "text";
+      button.textContent = "Приховати";
+    }
+  });
+}
+</code></pre>
+
+<h3>Результат виконання</h3>
+
+<p>
+Після натискання кнопки текст у полі введення приховується,
+а кнопка змінює назву на <strong>«Розкрити»</strong>.
+Після повторного натискання текст знову стає видимим.
+</p>
+
+<h3>Висновок</h3>
+
+<p>
+У завданні було використано обробник події <code>click</code>,
+зміну властивості <code>type</code> поля введення та зміну текстового
+вмісту кнопки за допомогою <code>textContent</code>.
+</p>

@@ -1,0 +1,66 @@
+<h2>Завдання №7</h2>
+
+<p>
+Порахувати кількість категорій у списку <code>ul#categories</code>.
+Для кожного елемента <code>li.item</code> вивести в консоль назву
+категорії та кількість вкладених елементів.
+</p>
+
+<ul id="categories">
+  <li class="item">
+    <h2>Animals</h2>
+    <ul>
+      <li>Cat</li>
+      <li>Hamster</li>
+      <li>Horse</li>
+      <li>Parrot</li>
+    </ul>
+  </li>
+
+  <li class="item">
+    <h2>Products</h2>
+    <ul>
+      <li>Bread</li>
+      <li>Parsley</li>
+      <li>Cheese</li>
+    </ul>
+  </li>
+
+  <li class="item">
+    <h2>Technologies</h2>
+    <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <li>React</li>
+      <li>Node.js</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Програмний код</h3>
+
+<pre><code>
+function task7() {
+  const categories = document.querySelectorAll("#categories .item");
+
+  console.log("Number of categories:", categories.length);
+
+  categories.forEach(category => {
+    const title = category.querySelector("h2").textContent;
+    const elements = category.querySelectorAll("ul li").length;
+
+    console.log("Category:", title);
+    console.log("Elements:", elements);
+  });
+}
+</code></pre>
+
+<h3>Висновок</h3>
+
+<p>
+У ході виконання завдання було опрацьовано навігацію по DOM-дереву,
+отримання елементів за допомогою селекторів та використання методу
+forEach(). Було реалізовано підрахунок кількості категорій і кількості
+елементів у кожній категорії з подальшим виведенням результатів у консоль.
+</p>

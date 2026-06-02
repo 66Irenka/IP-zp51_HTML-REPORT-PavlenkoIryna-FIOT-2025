@@ -1,0 +1,89 @@
+<h2>Завдання №10</h2>
+
+<p>
+Написати скрипт створення й очищення колекції елементів. Користувач
+вводить кількість елементів у поле введення. Після натискання кнопки
+<strong>Create</strong> створюється відповідна кількість блоків, а після
+натискання кнопки <strong>Destroy</strong> колекція очищається.
+</p>
+
+<div id="controls">
+  <input type="number" min="1" max="100" step="1" />
+  <button type="button" data-create>Create</button>
+  <button type="button" data-destroy>Destroy</button>
+</div>
+
+<div id="boxes"></div>
+
+<h3>Програмний код</h3>
+
+<pre><code>
+function task10() {
+  const input = document.querySelector("#controls input");
+  const createBtn = document.querySelector("[data-create]");
+  const destroyBtn = document.querySelector("[data-destroy]");
+  const boxes = document.getElementById("boxes");
+
+  if (!input || !createBtn || !destroyBtn || !boxes) return;
+
+  createBtn.onclick = () => {
+    const amount = Number(input.value);
+
+    if (amount < 1 || amount > 100 || !amount) {
+      alert("Введіть число від 1 до 100");
+      return;
+    }
+
+    destroyBoxes();
+    createBoxes(amount);
+    input.value = "";
+  };
+
+  destroyBtn.onclick = () => {
+    destroyBoxes();
+  };
+
+  function createBoxes(amount) {
+    const elements = [];
+
+    for (let i = 0; i < amount; i++) {
+      const box = document.createElement("div");
+      const size = 30 + i * 10;
+
+      box.style.width = `${size}px`;
+      box.style.height = `${size}px`;
+      box.style.backgroundColor = getRandomHexColor();
+      box.style.margin = "5px";
+
+      elements.push(box);
+    }
+
+    boxes.append(...elements);
+  }
+
+  function destroyBoxes() {
+    boxes.innerHTML = "";
+  }
+}
+</code></pre>
+
+<h3>Результат виконання</h3>
+
+<p>
+Після введення числа від 1 до 100 і натискання кнопки
+<strong>Create</strong> створюється відповідна кількість кольорових
+блоків. Перший блок має розмір 30x30px, а кожен наступний збільшується
+на 10px. При повторному натисканні <strong>Create</strong> стара колекція
+замінюється новою. Кнопка <strong>Destroy</strong> очищає всі створені
+елементи.
+</p>
+
+<h3>Висновок</h3>
+
+<p>
+У ході виконання завдання було використано метод
+<code>createElement()</code> для створення DOM-елементів, метод
+<code>append()</code> для додавання їх на сторінку, інлайн-стилі для
+задання розмірів і кольору блоків, а також очищення контейнера
+<code>div#boxes</code> через властивість <code>innerHTML</code>.
+</p>
