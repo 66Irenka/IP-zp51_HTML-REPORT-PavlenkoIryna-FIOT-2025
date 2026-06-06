@@ -1,0 +1,69 @@
+<h2>Завдання №1. Таймер зворотного відліку</h2>
+
+<p>
+У цьому завданні реалізовано таймер зворотного відліку до обраної користувачем дати.
+Користувач обирає дату і час, після чого натискає кнопку Start, і на сторінці
+відображається кількість днів, годин, хвилин і секунд, що залишилися.
+</p>
+
+<h3>Основні елементи HTML</h3>
+
+<pre><code>
+&lt;input type="text" id="datetime-picker" /&gt;
+&lt;button type="button" data-start&gt;Start&lt;/button&gt;
+
+&lt;div class="timer"&gt;
+  &lt;div class="field"&gt;
+    &lt;span class="value" data-days&gt;00&lt;/span&gt;
+    &lt;span class="label"&gt;Days&lt;/span&gt;
+  &lt;/div&gt;
+
+  &lt;div class="field"&gt;
+    &lt;span class="value" data-hours&gt;00&lt;/span&gt;
+    &lt;span class="label"&gt;Hours&lt;/span&gt;
+  &lt;/div&gt;
+
+  &lt;div class="field"&gt;
+    &lt;span class="value" data-minutes&gt;00&lt;/span&gt;
+    &lt;span class="label"&gt;Minutes&lt;/span&gt;
+  &lt;/div&gt;
+
+  &lt;div class="field"&gt;
+    &lt;span class="value" data-seconds&gt;00&lt;/span&gt;
+    &lt;span class="label"&gt;Seconds&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h3>Пояснення роботи</h3>
+
+<p>
+Для вибору дати використовується поле введення з id <code>datetime-picker</code>.
+Кнопка <code>Start</code> запускає таймер. Значення часу виводяться в окремі
+елементи з атрибутами <code>data-days</code>, <code>data-hours</code>,
+<code>data-minutes</code> і <code>data-seconds</code>.
+</p>
+
+<p>
+У JavaScript обрана дата порівнюється з поточною датою. Якщо дата знаходиться
+в минулому, користувач отримує повідомлення про помилку. Якщо дата коректна,
+кнопка Start стає активною. Після запуску таймера значення оновлюються щосекунди.
+</p>
+
+<h3>Що використано у завданні</h3>
+
+<ul>
+  <li>подія <code>click</code>;</li>
+  <li>робота з датами через об’єкт <code>Date</code>;</li>
+  <li>функція <code>setInterval()</code>;</li>
+  <li>форматування чисел через <code>padStart()</code>;</li>
+  <li>бібліотека <code>flatpickr</code> для вибору дати;</li>
+  <li>бібліотека <code>iziToast</code> для повідомлень.</li>
+</ul>
+
+<h3>Результат виконання</h3>
+
+<p>
+На сторінці відображається поле вибору дати, кнопка запуску таймера та блок із
+відліком часу у форматі: дні, години, хвилини, секунди.
+</p>

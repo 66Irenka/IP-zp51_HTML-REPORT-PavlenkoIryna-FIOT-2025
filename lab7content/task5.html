@@ -1,0 +1,117 @@
+<h2>Завдання №5. Пошук зображень через API</h2>
+
+<p>
+У цьому завданні реалізовано застосунок для пошуку зображень за ключовим словом.
+Користувач вводить запит у форму пошуку, після чого виконується HTTP-запит
+до публічного API Pixabay.
+</p>
+
+<h3>HTML-код форми пошуку</h3>
+
+<pre><code>
+&lt;form class="search-form"&gt;
+  &lt;input
+    type="text"
+    name="searchQuery"
+    placeholder="Search images..."
+    required
+  /&gt;
+
+  &lt;button type="submit"&gt;Search&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;ul class="gallery"&gt;&lt;/ul&gt;
+</code></pre>
+
+<h3>Пояснення роботи</h3>
+
+<p>
+Після відправлення форми значення з поля пошуку зчитується у JavaScript.
+Якщо поле порожнє, користувач отримує повідомлення про помилку.
+Якщо запит введено правильно, виконується HTTP-запит до API.
+</p>
+
+<p>
+У запиті використовуються параметри: ключ доступу, пошукове слово,
+тип зображення, орієнтація та безпечний пошук. Після отримання відповіді
+зображення динамічно додаються на сторінку у вигляді галереї.
+</p>
+
+<h3>Основна логіка JavaScript</h3>
+
+<pre><code>
+const form = document.querySelector(".search-form");
+const gallery = document.querySelector(".gallery");
+
+form.addEventListener("submit", event =&gt; {
+  event.preventDefault();
+
+  const query = event.target.elements.searchQuery.value.trim();
+
+  if (!query) {
+    return;
+  }
+
+  gallery.innerHTML = "";
+
+  fetchImages(query)
+    .then(images =&gt; {
+      if (images.length === 0) {
+        alert("Sorry, there are no images matching your search query. Please try again!");
+        return;
+      }
+
+      gallery.innerHTML = createGalleryMarkup(images);
+    })
+    .catch(error =&gt; {
+      console.error(error);
+    });
+});
+</code></pre>
+
+<h3>Створення розмітки карток</h3>
+
+<pre><code>
+function createGalleryMarkup(images) {
+  return images
+    .map(image =&gt; {
+      return `
+        &lt;li class="gallery-item"&gt;
+          &lt;a href="${image.largeImageURL}"&gt;
+            &lt;img src="${image.webformatURL}" alt="${image.tags}" /&gt;
+          &lt;/a&gt;
+
+          &lt;div class="info"&gt;
+            &lt;p&gt;Likes: ${image.likes}&lt;/p&gt;
+            &lt;p&gt;Views: ${image.views}&lt;/p&gt;
+            &lt;p&gt;Comments: ${image.comments}&lt;/p&gt;
+            &lt;p&gt;Downloads: ${image.downloads}&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      `;
+    })
+    .join("");
+}
+</code></pre>
+
+<h3>Що використано у завданні</h3>
+
+<ul>
+  <li>форма пошуку;</li>
+  <li>подія <code>submit</code>;</li>
+  <li>метод <code>fetch()</code>;</li>
+  <li>HTTP-запит до Pixabay API;</li>
+  <li>методи <code>then()</code> і <code>catch()</code>;</li>
+  <li>динамічне створення HTML-розмітки;</li>
+  <li>бібліотека <code>SimpleLightbox</code> для перегляду великих зображень;</li>
+  <li>бібліотека <code>iziToast</code> для повідомлень;</li>
+  <li>індикатор завантаження.</li>
+</ul>
+
+<h3>Результат виконання</h3>
+
+<p>
+На сторінці відображається форма пошуку. Після введення ключового слова
+завантажуються зображення з API та виводяться у галерею. При кліку на зображення
+відкривається його збільшена версія.
+</p>

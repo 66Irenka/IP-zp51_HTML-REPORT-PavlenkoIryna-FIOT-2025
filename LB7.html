@@ -9,51 +9,17 @@
   <script>
   async function loadPage(page) {
     try {
-      let response = await fetch('lab7content/' + page);
-      let text = await response.text();
+      const response = await fetch("lab7content/" + page);
 
-      document.getElementById('output').innerHTML = text;
-    if (page === "task1.html") task1();
-    if (page === "task3.html") task3();
-    if (page === "task5.html") task5();
-    if (page === "task7.html") task7();
-    if (page === "task8.html") task8();
-    if (page === "task9.html") task9();
-    if (page === "task10.html") task10();
+      if (!response.ok) {
+        throw new Error("Файл не знайдено: " + page);
+      }
 
-      switch (page) {
-  case 'task1.html':
-    if (typeof task1 === 'function') task1();
-    break;
-
-  case 'task3.html':
-    if (typeof task3 === 'function') task3();
-    break;
-
-  case 'task5.html':
-    if (typeof task5 === 'function') task5();
-    break;
-
-  case 'task7.html':
-    if (typeof task7 === 'function') task7();
-    break;
-
-  case 'task8.html':
-    if (typeof task8 === 'function') task8();
-    break;
-
-  case 'task9.html':
-    if (typeof task9 === 'function') task9();
-    break;
-
-  case 'task10.html':
-    if (typeof task9 === 'function') task10();
-    break;
-}
-
+      const text = await response.text();
+      document.getElementById("output").innerHTML = text;
     } catch (err) {
-      document.getElementById('output').innerHTML =
-        '<p>Помилка завантаження файлу!</p>';
+      document.getElementById("output").innerHTML =
+        "<p>Помилка завантаження файлу!</p>";
 
       console.error(err);
     }
@@ -118,7 +84,9 @@
                     </a>
                 </li>                 
 <li><a href="javascript:void(0)" onclick="loadPage('task1.html')">Завдання №1</a></li>
+<li><a href="javascript:void(0)" onclick="loadPage('task2.html')">Завдання №2</a></li>
 <li><a href="javascript:void(0)" onclick="loadPage('task3.html')">Завдання №3</a></li>
+<li><a href="javascript:void(0)" onclick="loadPage('task4.html')">Завдання №4</a></li>
 <li><a href="javascript:void(0)" onclick="loadPage('task5.html')">Завдання №5</a></li>
 <li><a href="javascript:void(0)" onclick="loadPage('conclusions7.html')">Висновки</a></li>
                 </ul>

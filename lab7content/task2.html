@@ -1,0 +1,92 @@
+<h2>Завдання №2. Форма зворотного зв’язку</h2>
+
+<p>
+У цьому завданні реалізовано форму зворотного зв’язку. Дані, які користувач
+вводить у поля Email та Message, автоматично зберігаються у локальне сховище
+браузера — localStorage.
+</p>
+
+<h3>HTML-код форми</h3>
+
+<pre><code>
+&lt;form class="feedback-form" autocomplete="off"&gt;
+  &lt;label&gt;
+    Email
+    &lt;input type="email" name="email" autofocus /&gt;
+  &lt;/label&gt;
+
+  &lt;label&gt;
+    Message
+    &lt;textarea name="message" rows="8"&gt;&lt;/textarea&gt;
+  &lt;/label&gt;
+
+  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+
+<h3>Пояснення роботи</h3>
+
+<p>
+Для збереження даних використовується об’єкт <code>formData</code>, який містить
+два поля: <code>email</code> та <code>message</code>. Коли користувач вводить
+текст у будь-яке поле форми, спрацьовує подія <code>input</code>.
+</p>
+
+<p>
+Після кожної зміни актуальні дані записуються у <code>localStorage</code>
+під ключем <code>feedback-form-state</code>. Завдяки цьому після оновлення
+сторінки введені значення не зникають.
+</p>
+
+<h3>Основна логіка JavaScript</h3>
+
+<pre><code>
+const form = document.querySelector(".feedback-form");
+
+const STORAGE_KEY = "feedback-form-state";
+
+let formData = {
+  email: "",
+  message: "",
+};
+
+form.addEventListener("input", event =&gt; {
+  formData[event.target.name] = event.target.value.trim();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+});
+
+form.addEventListener("submit", event =&gt; {
+  event.preventDefault();
+
+  if (!formData.email || !formData.message) {
+    alert("Fill please all fields");
+    return;
+  }
+
+  console.log(formData);
+
+  localStorage.removeItem(STORAGE_KEY);
+  formData = { email: "", message: "" };
+  form.reset();
+});
+</code></pre>
+
+<h3>Що використано у завданні</h3>
+
+<ul>
+  <li>форма HTML;</li>
+  <li>подія <code>input</code>;</li>
+  <li>подія <code>submit</code>;</li>
+  <li>об’єкт <code>localStorage</code>;</li>
+  <li>методи <code>JSON.stringify()</code> та <code>JSON.parse()</code>;</li>
+  <li>метод <code>form.reset()</code>.</li>
+</ul>
+
+<h3>Результат виконання</h3>
+
+<p>
+На сторінці відображається форма з двома полями та кнопкою Submit.
+При введенні даних вони зберігаються у локальне сховище. При відправленні
+форми виконується перевірка заповнення полів, після чого дані виводяться
+в консоль, а форма очищається.
+</p>

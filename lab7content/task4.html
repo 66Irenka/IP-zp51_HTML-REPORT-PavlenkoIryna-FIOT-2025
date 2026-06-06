@@ -1,0 +1,99 @@
+<h2>Завдання №4. Галерея зображень</h2>
+
+<p>
+У цьому завданні реалізовано галерею зображень. Дані для галереї зберігаються
+в масиві об’єктів, а HTML-розмітка створюється динамічно за допомогою JavaScript.
+</p>
+
+<h3>HTML-код галереї</h3>
+
+<pre><code>
+&lt;ul class="gallery"&gt;&lt;/ul&gt;
+</code></pre>
+
+<h3>Приклад масиву зображень</h3>
+
+<pre><code>
+const images = [
+  {
+    preview: "small-image.jpg",
+    original: "large-image.jpg",
+    description: "Опис зображення",
+  },
+];
+</code></pre>
+
+<h3>Пояснення роботи</h3>
+
+<p>
+Кожне зображення описується об’єктом із трьома властивостями:
+<code>preview</code>, <code>original</code> та <code>description</code>.
+На основі цього масиву JavaScript створює список елементів галереї.
+</p>
+
+<p>
+Для відкриття великого зображення використовується делегування подій.
+Обробник кліку встановлюється не на кожну картинку окремо, а на спільний
+контейнер <code>ul.gallery</code>. Якщо користувач натискає саме на зображення,
+відкривається модальне вікно.
+</p>
+
+<h3>Основна логіка JavaScript</h3>
+
+<pre><code>
+const gallery = document.querySelector(".gallery");
+
+const markup = images
+  .map(({ preview, original, description }) =&gt; {
+    return `
+      &lt;li class="gallery-item"&gt;
+        &lt;a class="gallery-link" href="${original}"&gt;
+          &lt;img
+            class="gallery-image"
+            src="${preview}"
+            data-source="${original}"
+            alt="${description}"
+          /&gt;
+        &lt;/a&gt;
+      &lt;/li&gt;
+    `;
+  })
+  .join("");
+
+gallery.innerHTML = markup;
+
+gallery.addEventListener("click", event =&gt; {
+  event.preventDefault();
+
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
+
+  const largeImageURL = event.target.dataset.source;
+
+  const instance = basicLightbox.create(`
+    &lt;img src="${largeImageURL}" alt="${event.target.alt}" /&gt;
+  `);
+
+  instance.show();
+});
+</code></pre>
+
+<h3>Що використано у завданні</h3>
+
+<ul>
+  <li>масив об’єктів;</li>
+  <li>метод <code>map()</code>;</li>
+  <li>метод <code>join()</code>;</li>
+  <li>динамічне створення HTML-розмітки;</li>
+  <li>делегування подій;</li>
+  <li>атрибут <code>data-source</code>;</li>
+  <li>бібліотека <code>basicLightbox</code>.</li>
+</ul>
+
+<h3>Результат виконання</h3>
+
+<p>
+На сторінці відображається галерея зображень. При кліку на картинку
+відкривається модальне вікно з її збільшеною версією.
+</p>

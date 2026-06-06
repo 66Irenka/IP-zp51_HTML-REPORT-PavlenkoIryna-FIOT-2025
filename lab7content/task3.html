@@ -1,0 +1,95 @@
+<h2>Завдання №3. Генератор промісів</h2>
+
+<p>
+У цьому завданні реалізовано генератор промісів. Користувач вводить затримку
+в мілісекундах, обирає стан промісу — fulfilled або rejected — і натискає кнопку
+Create notification.
+</p>
+
+<h3>HTML-код форми</h3>
+
+<pre><code>
+&lt;form class="form"&gt;
+  &lt;label&gt;
+    Delay (ms)
+    &lt;input type="number" name="delay" required /&gt;
+  &lt;/label&gt;
+
+  &lt;fieldset&gt;
+    &lt;legend&gt;State&lt;/legend&gt;
+
+    &lt;label&gt;
+      &lt;input type="radio" name="state" value="fulfilled" required /&gt;
+      Fulfilled
+    &lt;/label&gt;
+
+    &lt;label&gt;
+      &lt;input type="radio" name="state" value="rejected" required /&gt;
+      Rejected
+    &lt;/label&gt;
+  &lt;/fieldset&gt;
+
+  &lt;button type="submit"&gt;Create notification&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+
+<h3>Пояснення роботи</h3>
+
+<p>
+Після відправлення форми створюється новий проміс. Якщо користувач обрав
+<code>fulfilled</code>, проміс успішно виконується через задану кількість
+мілісекунд. Якщо обрано <code>rejected</code>, проміс відхиляється.
+</p>
+
+<h3>Основна логіка JavaScript</h3>
+
+<pre><code>
+const form = document.querySelector(".form");
+
+form.addEventListener("submit", event =&gt; {
+  event.preventDefault();
+
+  const delay = Number(event.target.elements.delay.value);
+  const state = event.target.elements.state.value;
+
+  const promise = new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+      if (state === "fulfilled") {
+        resolve(delay);
+      } else {
+        reject(delay);
+      }
+    }, delay);
+  });
+
+  promise
+    .then(delay =&gt; {
+      console.log(`✅ Fulfilled promise in ${delay}ms`);
+    })
+    .catch(delay =&gt; {
+      console.log(`❌ Rejected promise in ${delay}ms`);
+    });
+
+  form.reset();
+});
+</code></pre>
+
+<h3>Що використано у завданні</h3>
+
+<ul>
+  <li>форма HTML;</li>
+  <li>подія <code>submit</code>;</li>
+  <li>об’єкт <code>Promise</code>;</li>
+  <li>методи <code>resolve()</code> та <code>reject()</code>;</li>
+  <li>методи <code>then()</code> і <code>catch()</code>;</li>
+  <li>функція <code>setTimeout()</code>;</li>
+  <li>бібліотека <code>iziToast</code> для повідомлень.</li>
+</ul>
+
+<h3>Результат виконання</h3>
+
+<p>
+Після натискання кнопки створюється проміс, який через задану затримку
+виконується або відхиляється. Користувач бачить повідомлення про результат
+виконання промісу.
+</p>
