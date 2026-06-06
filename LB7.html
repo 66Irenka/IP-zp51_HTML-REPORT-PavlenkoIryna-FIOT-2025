@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Звіт Лабораторна 7 | Павленко І. А.</title>
+    <link rel="stylesheet" href="style.css" />
+   
+  <script>
+  async function loadPage(page) {
+    try {
+      let response = await fetch('lab7content/' + page);
+      let text = await response.text();
+
+      document.getElementById('output').innerHTML = text;
+    if (page === "task1.html") task1();
+    if (page === "task3.html") task3();
+    if (page === "task5.html") task5();
+    if (page === "task7.html") task7();
+    if (page === "task8.html") task8();
+    if (page === "task9.html") task9();
+    if (page === "task10.html") task10();
+
+      switch (page) {
+  case 'task1.html':
+    if (typeof task1 === 'function') task1();
+    break;
+
+  case 'task3.html':
+    if (typeof task3 === 'function') task3();
+    break;
+
+  case 'task5.html':
+    if (typeof task5 === 'function') task5();
+    break;
+
+  case 'task7.html':
+    if (typeof task7 === 'function') task7();
+    break;
+
+  case 'task8.html':
+    if (typeof task8 === 'function') task8();
+    break;
+
+  case 'task9.html':
+    if (typeof task9 === 'function') task9();
+    break;
+
+  case 'task10.html':
+    if (typeof task9 === 'function') task10();
+    break;
+}
+
+    } catch (err) {
+      document.getElementById('output').innerHTML =
+        '<p>Помилка завантаження файлу!</p>';
+
+      console.error(err);
+    }
+  }
+</script>
+  </head>
+   <body>
+    <div class="page-wrapper">
+      <header>
+        <div class="top-bar">
+          <div class="header-container">
+            <h1 class="text">
+             ЗВІТИ З ЛАБОРАТОРНИХ РОБІТ
+            </h1>
+          </div> 
+        </div>
+
+        <div class="middle-bar">
+          <div class="header-container middle-row">
+            <div class="author-text">
+              Студентка: Павленко Ірина Анатоліївна група: ІП-зп51
+            </div>
+
+            <div class="author-photo">
+              <img src="images/student_photo.jpg" alt="photo" />
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-bar">
+          <div class="header-container">
+            <nav class="menu">
+              <button id="themeToggle" class="theme-toggle">🌙</button>
+              <a href="index.html">Головна</a>
+              <a href="LB1.html">Лабораторна 1</a>
+              <a href="LB2.html">Лабораторна 2</a>
+              <a href="#">Лабораторна 3</a>
+              <a href="LB4.html">Лабораторна 4</a>
+              <a href="LB5.html">Лабораторна 5</a>
+              <a href="LB6.html">Лабораторна 6</a>
+              <a href="LB7.html" class="active">Лабораторна 7</a>
+              <a href="#">Лабораторна 8</a>
+              <a href="#">Лабораторна 9</a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <div class="main-container">
+        <div class="content-section">
+          <div class="left-side">
+            <aside>
+              <nav class="left-nav">
+                <ul>
+                  <li>
+                    <a
+                      href="javascript:void(0)"
+                      onclick="loadPage('tema7.html')">
+                      Тема.ЛР №7. МОДУЛЬНОСТЬ КОДУ. NODE.JS. JSON. WEB STORAGE API.
+АСИНХРОННІСТЬ. ПРОМІСИ. HTTP-ЗАПИТИ. REST API. AJAX. КРОС-
+ДОМЕННІ ЗАПИТИ. ПАГІНАЦІЯ. CRUD
+                    </a>
+                </li>                 
+<li><a href="javascript:void(0)" onclick="loadPage('task1.html')">Завдання №1</a></li>
+<li><a href="javascript:void(0)" onclick="loadPage('task3.html')">Завдання №3</a></li>
+<li><a href="javascript:void(0)" onclick="loadPage('task5.html')">Завдання №5</a></li>
+<li><a href="javascript:void(0)" onclick="loadPage('conclusions7.html')">Висновки</a></li>
+                </ul>
+              </nav>
+            </aside>
+          </div>
+          <div class="right-side">
+            <div class="info-card" id="output">
+              <h2>Звіт до Лабораторної роботи №7</h2>
+              <p>Оберіть пункт меню зліва, щоб переглянути матеріали.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="footer-container">
+          <p>
+            © 2026 Павленко І. А. –  ЗВІТИ З ЛАБОРАТОРНИХ РОБІТ З ДИСЦИПЛІНИ "Основи клієнтських розробок"
+          </p>
+          <p>
+            Контакти:
+            <a href="mailto:iryna.pavlenko@gmail.com"
+              >iryna.pavlenko@gmail.com</a>
+          </p>
+        </div>
+      </footer>
+    </div>
+   <script src="lab7content/lab7-tasks.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const themeToggle = document.getElementById("themeToggle");
+
+    if (!themeToggle) return;
+
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "light") {
+      document.body.classList.add("light-theme");
+      themeToggle.textContent = "☀️";
+    }
+
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("light-theme");
+
+      const isLight = document.body.classList.contains("light-theme");
+
+      localStorage.setItem("theme", isLight ? "light" : "dark");
+
+      themeToggle.textContent = isLight ? "☀️" : "🌙";
+    });
+  });
+</script>
+
+  </body>
+</html>
