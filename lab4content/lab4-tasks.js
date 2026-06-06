@@ -258,38 +258,54 @@ function task7() {
 // 1. Створюємо двовимірний масив (матрицю) 3x3 з випадковими числами від -10 до 10
 
 function task8() {
-const matrix = [
-  [5, -2, 8],
-  [-1, 3, -7],
-  [4, 0, -6]
-];
 
-console.log("Початковий масив:", matrix);
+  const matrix = [];
 
-const positiveNumbers = [];
-const negativeNumbers = [];
+  for (let i = 0; i < 3; i++) {
+    matrix[i] = [];
 
-for (let i = 0; i < matrix.length; i++) {
-  for (let j = 0; j < matrix[i].length; j++) {
-    const value = matrix[i][j];
-    
-    if (value > 0) {
-      positiveNumbers.push(value);
-    } else if (value < 0) {
-      negativeNumbers.push(value);
+    for (let j = 0; j < 3; j++) {
+      matrix[i][j] = Math.floor(Math.random() * 21) - 10;
     }
   }
-}
 
-console.log("Додатні:", positiveNumbers);
-console.log("Від'ємні:", negativeNumbers);
+  console.log("Початковий масив:", matrix);
 
-if (positiveNumbers.length >= 3) {
-  const newNegative = prompt("Введіть нове від'ємне число для заміни третього елемента:");
-  positiveNumbers[2] = Number(newNegative);
-} else {
-  alert("У масиві додатніх менше ніж 3 елементи, заміна неможлива.");
-}
+  const positiveNumbers = [];
+  const negativeNumbers = [];
 
-console.log("Додатні після заміни:", positiveNumbers);
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      const value = matrix[i][j];
+
+      if (value > 0) {
+        positiveNumbers.push(value);
+      } else if (value < 0) {
+        negativeNumbers.push(value);
+      }
+    }
+  }
+
+  console.log("Додатні:", positiveNumbers);
+  console.log("Від'ємні:", negativeNumbers);
+
+  if (positiveNumbers.length >= 3) {
+
+    const input = prompt(
+      "Введіть від'ємне число для заміни третього елемента:"
+    );
+
+    const newNegative = Number(input);
+
+    if (!Number.isNaN(newNegative) && newNegative < 0) {
+      positiveNumbers[2] = newNegative;
+    } else {
+      alert("Потрібно ввести саме від'ємне число");
+    }
+
+  } else {
+    alert("У масиві додатніх менше ніж 3 елементи");
+  }
+
+  console.log("Додатні після заміни:", positiveNumbers);
 }
