@@ -2,8 +2,8 @@
 
 <p>
 У цьому завданні реалізовано застосунок для пошуку зображень за ключовим словом.
-Користувач вводить запит у форму пошуку, після чого виконується HTTP-запит
-до публічного API Pixabay.
+Користувач вводить пошуковий запит у форму, після чого виконується HTTP-запит
+до сервісу Pixabay API та отримані зображення відображаються у вигляді галереї.
 </p>
 
 <h3>HTML-код форми пошуку</h3>
@@ -23,95 +23,137 @@
 &lt;ul class="gallery"&gt;&lt;/ul&gt;
 </code></pre>
 
-<h3>Пояснення роботи</h3>
-
-<p>
-Після відправлення форми значення з поля пошуку зчитується у JavaScript.
-Якщо поле порожнє, користувач отримує повідомлення про помилку.
-Якщо запит введено правильно, виконується HTTP-запит до API.
-</p>
-
-<p>
-У запиті використовуються параметри: ключ доступу, пошукове слово,
-тип зображення, орієнтація та безпечний пошук. Після отримання відповіді
-зображення динамічно додаються на сторінку у вигляді галереї.
-</p>
-
-<h3>Основна логіка JavaScript</h3>
+<h3>Фрагмент JavaScript коду</h3>
 
 <pre><code>
-const form = document.querySelector(".search-form");
-const gallery = document.querySelector(".gallery");
+import axios from 'axios';
+import iziToast from 'izitoast';
 
-form.addEventListener("submit", event =&gt; {
+const API_KEY = 'YOUR_API_KEY';
+
+const form = document.querySelector('.search-form');
+const gallery = document.querySelector('.gallery');
+
+form.addEventListener('submit', handleSubmit);
+
+function handleSubmit(event) {
   event.preventDefault();
 
-  const query = event.target.elements.searchQuery.value.trim();
+  const query =
+    event.target.elements.searchQuery.value.trim();
 
   if (!query) {
+    iziToast.warning({
+      message: 'Please enter a search query',
+    });
+
     return;
   }
 
-  gallery.innerHTML = "";
+  gallery.innerHTML = '';
 
-  fetchImages(query)
-    .then(images =&gt; {
-      if (images.length === 0) {
-        alert("Sorry, there are no images matching your search query. Please try again!");
-        return;
-      }
+  fetchImages(query);
+}
 
-      gallery.innerHTML = createGalleryMarkup(images);
+function fetchImages(query) {
+  axios
+    .get('https://pixabay.com/api/', {
+      params: {
+        key: API_KEY,
+        q: query,
+        image_type: 'photo',
+        orientation: 'horizontal',
+        safesearch: true,
+      },
     })
-    .catch(error =&gt; {
-      console.error(error);
+    .then(response => {
+      renderGallery(response.data.hits);
+    })
+    .catch(error => {
+      console.log(error);
     });
-});
-</code></pre>
-
-<h3>Створення розмітки карток</h3>
-
-<pre><code>
-function createGalleryMarkup(images) {
-  return images
-    .map(image =&gt; {
-      return `
-        &lt;li class="gallery-item"&gt;
-          &lt;a href="${image.largeImageURL}"&gt;
-            &lt;img src="${image.webformatURL}" alt="${image.tags}" /&gt;
-          &lt;/a&gt;
-
-          &lt;div class="info"&gt;
-            &lt;p&gt;Likes: ${image.likes}&lt;/p&gt;
-            &lt;p&gt;Views: ${image.views}&lt;/p&gt;
-            &lt;p&gt;Comments: ${image.comments}&lt;/p&gt;
-            &lt;p&gt;Downloads: ${image.downloads}&lt;/p&gt;
-          &lt;/div&gt;
-        &lt;/li&gt;
-      `;
-    })
-    .join("");
 }
 </code></pre>
+
+<h3>Створення карток галереї</h3>
+
+<pre><code>
+function renderGallery(images) {
+  const markup = images
+    .map(
+      image => `
+      &lt;li class="gallery-item"&gt;
+        &lt;a href="${image.largeImageURL}"&gt;
+          &lt;img
+            src="${image.webformatURL}"
+            alt="${image.tags}"
+          /&gt;
+        &lt;/a&gt;
+
+        &lt;div class="info"&gt;
+          &lt;p&gt;&lt;b&gt;Likes&lt;/b&gt;&lt;br&gt;${image.likes}&lt;/p&gt;
+          &lt;p&gt;&lt;b&gt;Views&lt;/b&gt;&lt;br&gt;${image.views}&lt;/p&gt;
+          &lt;p&gt;&lt;b&gt;Comments&lt;/b&gt;&lt;br&gt;${image.comments}&lt;/p&gt;
+          &lt;p&gt;&lt;b&gt;Downloads&lt;/b&gt;&lt;br&gt;${image.downloads}&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/li&gt;
+    `
+    )
+    .join('');
+
+  gallery.innerHTML = markup;
+}
+</code></pre>
+
+<h3>Пояснення роботи</h3>
+
+<p>
+На форму встановлено обробник події <code>submit</code>. Після введення
+ключового слова викликається функція <code>handleSubmit()</code>,
+яка отримує пошуковий запит та перевіряє його коректність.
+</p>
+
+<p>
+Для виконання HTTP-запиту використовується бібліотека
+<code>axios</code>. Запит надсилається до сервісу Pixabay API із
+параметрами пошуку: ключем доступу, пошуковим словом, типом зображення,
+орієнтацією та параметром безпечного пошуку.
+</p>
+
+<p>
+Після отримання відповіді функція <code>renderGallery()</code>
+створює HTML-розмітку карток зображень за допомогою методу
+<code>map()</code>. Для кожного зображення відображаються
+кількість вподобань, переглядів, коментарів та завантажень.
+</p>
+
+<p>
+Якщо користувач не ввів пошуковий запит або за результатами пошуку
+не знайдено жодного зображення, відображається повідомлення за допомогою
+бібліотеки <code>iziToast</code>.
+</p>
 
 <h3>Що використано у завданні</h3>
 
 <ul>
-  <li>форма пошуку;</li>
+  <li>HTML-форма пошуку;</li>
   <li>подія <code>submit</code>;</li>
-  <li>метод <code>fetch()</code>;</li>
-  <li>HTTP-запит до Pixabay API;</li>
-  <li>методи <code>then()</code> і <code>catch()</code>;</li>
+  <li>HTTP-запити;</li>
+  <li>REST API Pixabay;</li>
+  <li>бібліотека <code>axios</code>;</li>
+  <li>методи <code>then()</code> та <code>catch()</code>;</li>
   <li>динамічне створення HTML-розмітки;</li>
-  <li>бібліотека <code>SimpleLightbox</code> для перегляду великих зображень;</li>
-  <li>бібліотека <code>iziToast</code> для повідомлень;</li>
-  <li>індикатор завантаження.</li>
+  <li>метод <code>map()</code>;</li>
+  <li>бібліотека <code>iziToast</code>;</li>
+  <li>робота з JSON-даними.</li>
 </ul>
 
 <h3>Результат виконання</h3>
 
 <p>
-На сторінці відображається форма пошуку. Після введення ключового слова
-завантажуються зображення з API та виводяться у галерею. При кліку на зображення
-відкривається його збільшена версія.
+На сторінці відображається форма пошуку зображень. Після введення
+ключового слова та натискання кнопки Search виконується запит до
+Pixabay API, а знайдені зображення автоматично відображаються у галереї.
+Для кожного зображення додатково показується статистика переглядів,
+вподобань, коментарів та завантажень.
 </p>

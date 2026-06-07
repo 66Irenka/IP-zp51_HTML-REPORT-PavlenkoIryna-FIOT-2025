@@ -2,7 +2,9 @@
 
 <p>
 У цьому завданні реалізовано галерею зображень. Дані для галереї зберігаються
-в масиві об’єктів, а HTML-розмітка створюється динамічно за допомогою JavaScript.
+в масиві об'єктів, а HTML-розмітка створюється динамічно за допомогою JavaScript.
+Для перегляду великих зображень використовується бібліотека
+<code>basicLightbox</code>.
 </p>
 
 <h3>HTML-код галереї</h3>
@@ -11,39 +13,12 @@
 &lt;ul class="gallery"&gt;&lt;/ul&gt;
 </code></pre>
 
-<h3>Приклад масиву зображень</h3>
+<h3>Фрагмент JavaScript коду</h3>
 
 <pre><code>
-const images = [
-  {
-    preview: "small-image.jpg",
-    original: "large-image.jpg",
-    description: "Опис зображення",
-  },
-];
-</code></pre>
+const gallery = document.querySelector('.gallery');
 
-<h3>Пояснення роботи</h3>
-
-<p>
-Кожне зображення описується об’єктом із трьома властивостями:
-<code>preview</code>, <code>original</code> та <code>description</code>.
-На основі цього масиву JavaScript створює список елементів галереї.
-</p>
-
-<p>
-Для відкриття великого зображення використовується делегування подій.
-Обробник кліку встановлюється не на кожну картинку окремо, а на спільний
-контейнер <code>ul.gallery</code>. Якщо користувач натискає саме на зображення,
-відкривається модальне вікно.
-</p>
-
-<h3>Основна логіка JavaScript</h3>
-
-<pre><code>
-const gallery = document.querySelector(".gallery");
-
-const markup = images
+const galleryMarkup = images
   .map(({ preview, original, description }) =&gt; {
     return `
       &lt;li class="gallery-item"&gt;
@@ -58,42 +33,82 @@ const markup = images
       &lt;/li&gt;
     `;
   })
-  .join("");
+  .join('');
 
-gallery.innerHTML = markup;
+gallery.innerHTML = galleryMarkup;
 
-gallery.addEventListener("click", event =&gt; {
+gallery.addEventListener('click', handleGalleryClick);
+
+function handleGalleryClick(event) {
   event.preventDefault();
 
-  if (event.target.nodeName !== "IMG") {
+  const image = event.target;
+
+  if (!image.classList.contains('gallery-image')) {
     return;
   }
 
-  const largeImageURL = event.target.dataset.source;
+  const largeImageUrl = image.dataset.source;
+  const description = image.alt;
 
   const instance = basicLightbox.create(`
-    &lt;img src="${largeImageURL}" alt="${event.target.alt}" /&gt;
+    &lt;div class="modal-image-wrapper"&gt;
+      &lt;img src="${largeImageUrl}" alt="${description}" /&gt;
+      &lt;p&gt;${description}&lt;/p&gt;
+    &lt;/div&gt;
   `);
 
   instance.show();
-});
+}
 </code></pre>
+
+<h3>Пояснення роботи</h3>
+
+<p>
+Масив <code>images</code> містить інформацію про всі зображення галереї.
+Кожен об'єкт має властивості <code>preview</code>,
+<code>original</code> та <code>description</code>.
+</p>
+
+<p>
+За допомогою методу <code>map()</code> формується HTML-розмітка для
+кожного елемента галереї. Після цього всі елементи об'єднуються методом
+<code>join()</code> і додаються до контейнера
+<code>ul.gallery</code>.
+</p>
+
+<p>
+Для обробки натискань використовується делегування подій.
+Обробник встановлюється на весь список галереї, а не на кожне зображення
+окремо. Це дозволяє ефективніше працювати з великою кількістю елементів.
+</p>
+
+<p>
+Після натискання на зображення викликається функція
+<code>handleGalleryClick()</code>, яка отримує адресу великого
+зображення з атрибута <code>data-source</code>. Далі за допомогою
+бібліотеки <code>basicLightbox</code> створюється модальне вікно,
+у якому відображається збільшена версія зображення та його опис.
+</p>
 
 <h3>Що використано у завданні</h3>
 
 <ul>
-  <li>масив об’єктів;</li>
+  <li>масив об'єктів;</li>
   <li>метод <code>map()</code>;</li>
   <li>метод <code>join()</code>;</li>
   <li>динамічне створення HTML-розмітки;</li>
   <li>делегування подій;</li>
   <li>атрибут <code>data-source</code>;</li>
+  <li>об'єкт <code>event</code>;</li>
+  <li>метод <code>classList.contains()</code>;</li>
   <li>бібліотека <code>basicLightbox</code>.</li>
 </ul>
 
 <h3>Результат виконання</h3>
 
 <p>
-На сторінці відображається галерея зображень. При кліку на картинку
-відкривається модальне вікно з її збільшеною версією.
+На сторінці відображається галерея зображень, створена динамічно за
+даними масиву. При натисканні на будь-яке зображення відкривається
+модальне вікно із його збільшеною версією та текстовим описом.
 </p>

@@ -35,19 +35,69 @@
 &lt;/div&gt;
 </code></pre>
 
+<h3>Фрагмент JavaScript коду</h3>
+
+<pre><code>
+flatpickr(datePicker, {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+
+  onClose(selectedDates) {
+    const selectedDate = selectedDates[0];
+
+    if (selectedDate &lt;= new Date()) {
+      iziToast.error({
+        message: 'Please choose a date in the future',
+      });
+
+      startBtn.disabled = true;
+      return;
+    }
+
+    userSelectedDate = selectedDate;
+    startBtn.disabled = false;
+  },
+});
+
+function startTimer() {
+  startBtn.disabled = true;
+  datePicker.disabled = true;
+
+  timerId = setInterval(() =&gt; {
+    const timeLeft = userSelectedDate - new Date();
+
+    if (timeLeft &lt;= 0) {
+      clearInterval(timerId);
+      updateTimerFace(0);
+      return;
+    }
+
+    updateTimerFace(timeLeft);
+  }, 1000);
+}
+</code></pre>
+
 <h3>Пояснення роботи</h3>
 
 <p>
 Для вибору дати використовується поле введення з id <code>datetime-picker</code>.
-Кнопка <code>Start</code> запускає таймер. Значення часу виводяться в окремі
-елементи з атрибутами <code>data-days</code>, <code>data-hours</code>,
-<code>data-minutes</code> і <code>data-seconds</code>.
+Бібліотека <code>flatpickr</code> забезпечує зручний вибір дати та часу.
+Після закриття календаря виконується перевірка, чи знаходиться вибрана дата
+в майбутньому.
 </p>
 
 <p>
-У JavaScript обрана дата порівнюється з поточною датою. Якщо дата знаходиться
-в минулому, користувач отримує повідомлення про помилку. Якщо дата коректна,
-кнопка Start стає активною. Після запуску таймера значення оновлюються щосекунди.
+Якщо користувач обрав дату з минулого, за допомогою бібліотеки
+<code>iziToast</code> відображається повідомлення про помилку і кнопка Start
+залишається неактивною. Якщо дата коректна, кнопка стає доступною для запуску таймера.
+</p>
+
+<p>
+Після натискання кнопки Start запускається функція
+<code>startTimer()</code>. За допомогою <code>setInterval()</code>
+щосекунди обчислюється різниця між поточною та кінцевою датою, після чого
+оновлюються значення днів, годин, хвилин і секунд на сторінці.
 </p>
 
 <h3>Що використано у завданні</h3>
@@ -65,5 +115,6 @@
 
 <p>
 На сторінці відображається поле вибору дати, кнопка запуску таймера та блок із
-відліком часу у форматі: дні, години, хвилини, секунди.
+відліком часу у форматі: дні, години, хвилини та секунди. Після запуску таймера
+дані автоматично оновлюються кожну секунду до досягнення кінцевої дати.
 </p>
