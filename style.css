@@ -80,10 +80,10 @@ body {
 }
 
 .author-photo img {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   object-fit: cover;
-  border: 2px solid var(--color-accent);
+  object-position: center top;
   box-shadow: 0 0 16px rgba(0, 140, 153, 0.5);
 }
 
